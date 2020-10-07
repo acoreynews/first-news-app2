@@ -1,8 +1,8 @@
 import csv
 from flask import Flask
+from flask import abort
 from flask import render_template
-app = Flask(__name__)  # Note the double underscores on each side!
-
+app = Flask(__name__)
 
 def get_csv():
     csv_path = './static/la-riots-deaths.csv'
@@ -24,7 +24,7 @@ def detail(row_id):
     for row in object_list:
         if row['id'] == row_id:
             return render_template(template, object=row)
+    abort(404)
 
 if __name__ == '__main__':
-    # Fire up the Flask test server
     app.run(debug=True, use_reloader=True)
